@@ -1,0 +1,55 @@
+<div class="centered-block">{{edit:cloze:Text}}</div><br>
+<br><p style="color:red;">
+{{edit:Back Extra}}
+</p>
+
+
+<!-- TAGS -->
+<!-- stolen from https://www.reddit.com/r/Anki/comments/10ijm7a/how_do_i_only_show_the_last_tag_in_my_cards_with/ and modified :P -->
+-- <b style="color:grey;"><i>{{Subdeck}}</i></b> --<br><br>
+
+<div style='font-family: Courier; font-size: 22px; color: #2aa198; font-weight:bold;' id="tag-container" hidden>
+<span id="tags">{{Tags}}</span>
+
+</div>
+
+
+<script>
+
+{
+
+var trimCurrentDeckParent = true;
+
+const tagEl = document.querySelector('#tags'); // Or whatever your tag container class is called
+
+const tags = tagEl.innerHTML.split(' '); // For multiple tags
+let newHtml = '';
+
+tags.forEach((tag) => {
+var temp = `${tag.substring(tag.lastIndexOf('::#') + 3)}<br>`;
+if(temp != "{{Subdeck}}")
+{
+	if(trimCurrentDeckParent
+	&& temp.substring(0, temp.indexOf('::')) == "{{Subdeck}}")
+	{
+		temp = temp.substring(temp.indexOf('::') + 2);
+	}
+	if(temp.startsWith('!'))
+		temp = '<font color="red">' + temp + "</font>"		
+	newHtml += temp;
+}
+});
+
+if(!trimCurrentDeckParent && newHtml.split('<br>').length == 2)
+	newHtml = newHtml.substring(newHtml.indexOf('::') + 2)
+newHtml = newHtml.replaceAll('::', '/');
+
+tagEl.innerHTML = newHtml;
+
+// Make tags visible if any are present
+
+document.querySelector('#tag-container').removeAttribute('hidden');
+
+}
+
+</script>

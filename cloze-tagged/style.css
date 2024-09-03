@@ -1,0 +1,23 @@
+@import url('_globals.css');
+@import url('_syntax.css');
+
+.card {
+    font-family: arial;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    background-color: white;
+}
+.centered-block {
+    display: inline-block;
+    text-align: left;
+    /* Uncomment if you want to set the maximum width of the block */
+    /* max-width: 60vw; */
+}
+.cloze {
+    font-weight: bold;
+    color: blue;
+}
+.nightMode .cloze {
+    color: lightblue;
+}
